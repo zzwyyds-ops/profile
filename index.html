@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>张志伟 - 个人主页</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #f8f9fa; --card: #ffffff; --text: #1a1a2e;
+  --text2: #555; --accent: #6c63ff; --border: #eaeaea;
+  --shadow: 0 2px 20px rgba(0,0,0,0.06);
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.7;
+}
+.container { max-width: 840px; margin: 0 auto; padding: 0 24px; }
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  background: rgba(255,255,255,0.85); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+nav .container { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+nav .logo { font-weight: 700; font-size: 18px; color: var(--accent); }
+nav .links { display: flex; gap: 28px; }
+nav .links a { text-decoration: none; color: var(--text2); font-size: 14px; transition: color 0.2s; }
+nav .links a:hover { color: var(--accent); }
+.menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text); }
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 100px 24px 60px;
+}
+.hero-avatar {
+  width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 24px;
+  background: linear-gradient(135deg, var(--accent), #a78bfa);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 44px; color: #fff; font-weight: 300;
+}
+.hero h1 { font-size: 40px; font-weight: 700; margin-bottom: 8px; }
+.hero .subtitle { font-size: 18px; color: var(--text2); margin-bottom: 20px; }
+.hero .tagline { font-size: 15px; color: var(--text2); max-width: 520px; margin: 0 auto 32px; }
+.hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.hero-btns a { padding: 12px 28px; border-radius: 8px; text-decoration: none; font-size: 15px; font-weight: 500; transition: all 0.25s; }
+.hero-btns .primary { background: var(--accent); color: #fff; }
+.hero-btns .primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(108,99,255,0.35); }
+.hero-btns .secondary { background: var(--card); color: var(--text); border: 1px solid var(--border); }
+.hero-btns .secondary:hover { border-color: var(--accent); }
+section { padding: 80px 0; }
+.section-title { font-size: 28px; font-weight: 700; margin-bottom: 12px; text-align: center; }
+.section-desc { text-align: center; color: var(--text2); font-size: 15px; margin-bottom: 48px; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.about-card { background: var(--card); border-radius: 14px; padding: 28px; border: 1px solid var(--border); box-shadow: var(--shadow); }
+.about-card h3 { font-size: 16px; margin-bottom: 12px; color: var(--accent); }
+.about-card p, .about-card li { font-size: 14px; color: var(--text2); line-height: 1.8; }
+.about-card ul { list-style: none; padding: 0; }
+.about-card ul li::before { content: "▸ "; color: var(--accent); }
+.skills { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.skill-item { background: var(--card); border-radius: 10px; padding: 20px; border: 1px solid var(--border); text-align: center; transition: all 0.25s; }
+.skill-item:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.skill-icon { font-size: 32px; margin-bottom: 8px; }
+.skill-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.skill-item p { font-size: 12px; color: var(--text2); }
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+.timeline-item { position: relative; margin-bottom: 32px; }
+.timeline-item::before { content: ""; position: absolute; left: -28px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); }
+.timeline-item .date { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.timeline-item h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+.timeline-item .org { font-size: 14px; color: var(--text2); margin-bottom: 8px; }
+.timeline-item p { font-size: 14px; color: var(--text2); line-height: 1.7; }
+.contact { text-align: center; }
+.contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.contact-links a { display: flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 10px; text-decoration: none; background: var(--card); border: 1px solid var(--border); color: var(--text); font-size: 14px; transition: all 0.25s; }
+.contact-links a:hover { border-color: var(--accent); transform: translateY(-2px); }
+footer { text-align: center; padding: 32px 24px; font-size: 13px; color: var(--text2); border-top: 1px solid var(--border); }
+@media (max-width: 700px) {
+  nav .links { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; width: 100%; background: rgba(255,255,255,0.97); padding: 16px 24px; border-bottom: 1px solid var(--border); }
+  nav .links.open { display: flex; }
+  .menu-btn { display: block; }
+  .hero h1 { font-size: 30px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .skills { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) { .hero h1 { font-size: 26px; } .skills { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<nav>
+  <div class="container">
+    <div class="logo">ZZWYDS</div>
+    <button class="menu-btn" onclick="document.querySelector('.links').classList.toggle('open')">☰</button>
+    <div class="links">
+      <a href="#about">关于</a>
+      <a href="#skills">技能</a>
+      <a href="#exp">经历</a>
+      <a href="#contact">联系</a>
+    </div>
+  </div>
+</nav>
+<section class="hero" id="home">
+  <div>
+    <div class="hero-avatar">张</div>
+    <h1>张志伟</h1>
+    <div class="subtitle">全栈开发者 / 软件工程学生</div>
+    <div class="tagline">热爱编程，专注于 Web 开发与算法研究。善于将复杂问题拆解为简洁优雅的解决方案。</div>
+    <div class="hero-btns">
+      <a href="#contact" class="primary">联系我</a>
+      <a href="#exp" class="secondary">查看经历</a>
+    </div>
+  </div>
+</section>
+<section id="about">
+  <div class="container">
+    <h2 class="section-title">关于我</h2>
+    <p class="section-desc">一个喜欢写代码的普通学生</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <h3>📋 基本信息</h3>
+        <ul>
+          <li>姓名：张志伟</li>
+          <li>班级：2023 级 6 班</li>
+          <li>学号：202310530632</li>
+          <li>方向：全栈开发 / 算法</li>
+        </ul>
+      </div>
+      <div class="about-card">
+        <h3>🎯 兴趣领域</h3>
+        <ul>
+          <li>Web 全栈开发（前端 + 后端）</li>
+          <li>算法设计与分析</li>
+          <li>贪心算法 / 动态规划</li>
+          <li>开源项目与工具链</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="skills" style="background: var(--card);">
+  <div class="container">
+    <h2 class="section-title">技能</h2>
+    <p class="section-desc">日常使用的技术和工具</p>
+    <div class="skills">
+      <div class="skill-item"><div class="skill-icon">⚛️</div><h4>HTML / CSS / JS</h4><p>响应式布局、Canvas 动画</p></div>
+      <div class="skill-item"><div class="skill-icon">🦀</div><h4>C / C++</h4><p>算法实现、数据结构</p></div>
+      <div class="skill-item"><div class="skill-icon">🐍</div><h4>Python</h4><p>脚本工具、自动化</p></div>
+      <div class="skill-item"><div class="skill-icon">🗄️</div><h4>SQL</h4><p>数据库设计、查询优化</p></div>
+      <div class="skill-item"><div class="skill-icon">🔧</div><h4>Git</h4><p>版本控制、团队协作</p></div>
+      <div class="skill-item"><div class="skill-icon">📐</div><h4>算法</h4><p>贪心、DP、图论</p></div>
+    </div>
+  </div>
+</section>
+<section id="exp">
+  <div class="container">
+    <h2 class="section-title">经历</h2>
+    <p class="section-desc">学习与实践的足迹</p>
+    <div class="timeline">
+      <div class="timeline-item"><div class="date">2023 - 至今</div><h3>软件工程 本科</h3><div class="org">2023 级 6 班</div><p>系统学习数据结构、算法设计、操作系统、计算机网络等核心课程。</p></div>
+      <div class="timeline-item"><div class="date">2026</div><h3>活动选择问题 - 贪心算法实验</h3><div class="org">算法分析与设计课程</div><p>实现基于最早结束时间优先策略的贪心算法，用 C 语言完成活动选择问题的求解。</p></div>
+      <div class="timeline-item"><div class="date">2026</div><h3>消消乐小游戏</h3><div class="org">个人项目</div><p>使用 HTML5 Canvas 开发 8×8 三消游戏，含连击计分系统，部署至 GitHub Pages。</p></div>
+    </div>
+  </div>
+</section>
+<section id="contact" style="background: var(--card);">
+  <div class="container">
+    <h2 class="section-title">联系我</h2>
+    <p class="section-desc">欢迎交流与合作</p>
+    <div class="contact-links">
+      <a href="mailto:zzwyyds@gmail.com">✉️ zzwyyds@gmail.com</a>
+      <a href="https://github.com/ZZWYYDS-OPS" target="_blank">🐱 GitHub</a>
+      <a href="https://zzwyyds-ops.github.io/match3/" target="_blank">🎮 我的游戏</a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="container">© 2026 张志伟 · Built with ❤️</div>
+</footer>
+<script>
+document.querySelectorAll('nav .links a').forEach(a => {
+  a.addEventListener('click', () => document.querySelector('.links').classList.remove('open'));
+});
+</script>
+</body>
+</html>
