@@ -592,8 +592,8 @@ h1 {
   stroke-width: 3.4;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: 110;
-  animation: life-line 2s linear infinite;
+  filter: drop-shadow(0 4px 8px rgba(255, 122, 69, 0.22));
+  animation: life-line 1.65s ease-in-out infinite;
 }
 
 @keyframes life-glow {
@@ -601,7 +601,7 @@ h1 {
 }
 
 @keyframes life-line {
-  to { stroke-dashoffset: -220; }
+  50% { opacity: 0.66; transform: translateY(-1px); }
 }
 
 @keyframes float-a {
